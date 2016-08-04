@@ -10,10 +10,10 @@ db = mongoose();
 
 app = express();
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
 module.exports = app;
 
-console.log(process.env.NODE_ENV);
+console.log("Environment is " + process.env.NODE_ENV);
 
-console.log('Server running at http://localhost:3000/');
+console.log("Server running...");
