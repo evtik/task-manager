@@ -1,1 +1,1 @@
-web: NODE_ENV=development node dist/server.js
+web: node dist/server.js
