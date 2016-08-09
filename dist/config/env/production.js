@@ -1,3 +1,4 @@
 module.exports = {
-  db: 'mongodb://rubyGarage:qwerty@ds139715.mlab.com:39715/rg-task-manager'
+  db: 'mongodb://rubyGarage:qwerty@ds139715.mlab.com:39715/rg-task-manager',
+  sessionSecret: 'rg_214284'
 };

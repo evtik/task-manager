@@ -36,8 +36,11 @@
     "angular-animate": "^1.4.8",
     "angular-route": "^1.4.8",
     "body-parser": "^1.14.2",
+    "compression": "^1.6.2",
     "express": "~4.13.3",
+    "express-session": "^1.14.0",
     "jade": "~1.11.0",
+    "method-override": "^2.3.6",
     "mongodb": "^2.1.7",
     "mongoose": "^4.5.8",
     "morgan": "~1.6.1"
