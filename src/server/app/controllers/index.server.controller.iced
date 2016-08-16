@@ -1,2 +1,2 @@
 exports.render = (req, res) ->
-	res.render 'index',
+	res.render 'index', bootstrappedUser: req.user

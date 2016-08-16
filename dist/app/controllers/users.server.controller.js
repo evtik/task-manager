@@ -1,13 +1,44 @@
-var User;
+var User, getErrorMessages, mongoose;
 
-User = require('mongoose').model('User');
+mongoose = require('mongoose');
 
-exports.create = function(req, res, next) {
+User = mongoose.model('User');
+
+getErrorMessages = function(err) {
+  var errors, k, v, _ref;
+  if (err.code) {
+    switch (err.code) {
+      case 11000:
+      case 11001:
+        return ['This user name already exists'];
+      default:
+        return ["MongoDB " + err.code + " error"];
+    }
+  } else if (err.errors) {
+    errors = [];
+    _ref = err.errors;
+    for (k in _ref) {
+      v = _ref[k];
+      if (v.message) {
+        errors.push(v.message);
+      }
+    }
+    return errors;
+  } else if (err.message) {
+    return [err.message];
+  } else {
+    return ['Unknown server error'];
+  }
+};
+
+exports.create = function(req, res) {
   var user;
   user = new User(req.body);
   return user.save(function(err) {
     if (err) {
-      return next(err);
+      return res.status(400).send({
+        errorMessages: getErrorMessages(err)
+      });
     } else {
       return res.json(user);
     }

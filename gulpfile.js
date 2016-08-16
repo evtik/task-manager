@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
 	gutil = require('gulp-util'),
+	nodeInspector = require('gulp-node-inspector'),
 	nodemon = require('gulp-nodemon'),
 	livereload = require('gulp-livereload'),
 	open = require('gulp-open'),

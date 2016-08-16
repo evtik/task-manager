@@ -1,0 +1,18 @@
+form(data-ng-submit="update()")
+	div
+		label First Name:
+		input(name="firstName" data-ng-model="user.firstName")
+	div
+		label Last Name:
+		input(name="lastName" data-ng-model="user.lastName")
+	div
+		label User name:
+		input(name="userName" data-ng-model="user.userName")
+	div
+		label Password:
+		input(type="password" name="password" data-ng-model="user.password")
+	div
+		label Confirm password:
+		input(type="password" name="confirmPassword" data-ng-model="user.confirmPassword")
+	div(data-ng-show="error") {{ error }}
+	input(type="submit" value="Save")

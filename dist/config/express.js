@@ -25,18 +25,14 @@ module.exports = function() {
   if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
   } else {
-    app.use(compress);
+    app.use(compress());
   }
   app.use(bodyParser.urlencoded({
     extended: true
   }));
   app.use(bodyParser.json());
   app.use(methodOverride());
-  app.use(session({
-    saveUninitialized: true,
-    resave: true,
-    secret: config.sessionSecret
-  }));
+  app.locals.basedir = path.join(__dirname, '/../app/views');
   app.set('views', __dirname + '/../app/views');
   app.set('view engine', 'jade');
   (require('../app/routes/index.server.routes'))(app);

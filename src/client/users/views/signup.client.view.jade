@@ -1,0 +1,19 @@
+form(data-ng-submit="create()")
+	div
+		label First Name:
+		input(data-ng-model="firstName")
+	div
+		label Last Name:
+		input(data-ng-model="lastName")
+	div
+		label Username:
+		input(data-ng-model="userName")
+	div
+		label Password:
+		input(type="password" data-ng-model="password")
+	div
+		label Confirm password:
+		input(type="password" data-ng-model="confirmPassword")
+	div(data-ng-show="error")
+		p(data-ng-repeat="err in error.data.errorMessages") {{ err }}
+	input(type="submit" value="Sign Up")

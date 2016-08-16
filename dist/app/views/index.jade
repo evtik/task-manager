@@ -1,13 +1,15 @@
-doctype
-html
-	head
-		meta(charset="utf-8")
-		meta(http-equiv="X-UA_Compatible" content="IE-Edge")
-		meta(name="viewport" content="width=device-width, initial-scale=1")
-		title Task Manager
-		link(href='/css/style.css', rel='stylesheet')
-	body
-		.container
-			h1 Welcome to Task Manager!
-			div(ng-view)
-		script(src="/js/bundle.js")
+extends /includes/layout
+
+block main-content
+	.container
+		nav.navbar.navbar-dark.bg-inverse
+			a.navbar-brand(href="/#!") Task Manager
+			a.btn.btn-primary.pull-xs-right(href='/#!/signup') Sign Up
+			p.nav.navbar.navbar-text.pull-xs-right or
+			form.form-inline.pull-xs-right
+				.form-group
+					input.form-control(placeholder="username")
+				.form-group
+					input.form-control(placeholder="password")
+				button.form-group.btn.btn-primary Sign In
+		div(ng-view)

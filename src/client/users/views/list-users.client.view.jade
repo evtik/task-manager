@@ -1,0 +1,5 @@
+div(data-ng-repeat="user in users")
+	p
+		{{user.firstName}} {{user.lastName}} {{user.userName}}
+	a(href='/#!/users/:userId' data-ng-click="edit()") Edit
+	a(href='/#!/users/:userId' data-ng-click="delete()") Delete
