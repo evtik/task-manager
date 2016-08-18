@@ -1,8 +1,8 @@
-var User, getErrorMessages, mongoose;
+var User, getErrorMessages, passport;
 
-mongoose = require('mongoose');
+User = require('mongoose').model('User');
 
-User = mongoose.model('User');
+passport = require('passport');
 
 getErrorMessages = function(err) {
   var errors, k, v, _ref;
@@ -31,7 +31,30 @@ getErrorMessages = function(err) {
   }
 };
 
-exports.create = function(req, res) {
+exports.authenticate = function(req, res, next) {
+  var auth;
+  auth = passport.authenticate('local', function(err, user) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      res.send({
+        getErrorMessages: ['passport auth failed']
+      });
+    }
+    return req.logIn(user, function(err) {
+      if (err) {
+        return next(err);
+      }
+      return res.send({
+        user: user
+      });
+    });
+  });
+  return auth(req, res, next);
+};
+
+exports.create = function(req, res, next) {
   var user;
   user = new User(req.body);
   return user.save(function(err) {
@@ -40,7 +63,12 @@ exports.create = function(req, res) {
         errorMessages: getErrorMessages(err)
       });
     } else {
-      return res.json(user);
+      return req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        return res.json(user);
+      });
     }
   });
 };

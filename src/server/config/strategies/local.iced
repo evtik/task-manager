@@ -4,7 +4,7 @@ User = require('mongoose').model 'User'
 
 module.exports = () ->
 	passport.use new LocalStrategy (username, password, done) ->
-		User.findOne username: username, (err, user) ->
+		User.findOne(userName: username).exec (err, user) ->
 			if err
 				return done err
 
@@ -15,3 +15,4 @@ module.exports = () ->
 				return done null, off, message: 'Invalid password'
 
 			return done null, user
+	null

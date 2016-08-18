@@ -1,14 +1,14 @@
 var mongoose, passport;
 
-passport = require('passport');
-
 mongoose = require('mongoose');
+
+passport = require('passport');
 
 module.exports = function() {
   var User;
   User = mongoose.model('User');
   passport.serializeUser(function(user, done) {
-    return done(null, user.id);
+    return done(null, user._id);
   });
   passport.deserializeUser(function(id, done) {
     return User.findOne({
@@ -17,5 +17,6 @@ module.exports = function() {
       return done(err, user);
     });
   });
-  return (require('./strategies/local'))();
+  (require('./strategies/local'))();
+  return null;
 };

@@ -1,7 +1,6 @@
 require('angular').module('users').controller 'UsersController',
 	['$scope', '$routeParams', '$location', 'Users',
 		($scope, $routeParams, $location, Users) ->
-			# $scope.authentication = Authentication
 
 			$scope.create = () ->
 				user = new Users

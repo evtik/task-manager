@@ -2,11 +2,11 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 mongoose = require './config/mongoose'
 express = require './config/express'
-# passport = require './config/passport'
+passport = require './config/passport'
 
 db = mongoose()
 app = express()
-# passport = passport()
+passport = passport()
 
 app.listen(process.env.PORT || 3000)
 

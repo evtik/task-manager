@@ -1,15 +1,90 @@
 extends /includes/layout
 
 block main-content
-	.container
-		nav.navbar.navbar-dark.bg-inverse
-			a.navbar-brand(href="/#!") Task Manager
-			a.btn.btn-primary.pull-xs-right(href='/#!/signup') Sign Up
-			p.nav.navbar.navbar-text.pull-xs-right or
-			form.form-inline.pull-xs-right
-				.form-group
-					input.form-control(placeholder="username")
-				.form-group
-					input.form-control(placeholder="password")
-				button.form-group.btn.btn-primary Sign In
-		div(ng-view)
+	//- .tm-navbar.container
+	//- 	.row
+	//- 		.col-xs-12.col-sm-12.col-md-4.col-lg-3.vcenter
+	//- 			h1 Task Manager
+	//- 			h5 For those who highly value their time
+	//- 		.col-xs-12.col-sm-12.col-md-8.col-lg-9.vcenter
+	//- 			.row
+	//- 				.col-xs-12.col-sm-12.col-md-6.col-lg-8
+	//- 					form.form-inline
+	//- 						.form-group
+	//- 							input.form-control(placeholder="username")
+	//- 						.form-group
+	//- 							input.form-control(placeholder="password")
+	//- 						a.btn.btn-default(href='/#!/signin') Sign In
+	//- 				.col-xs-12.col-sm-12.col-md-3.col-lg-2
+	//- 					span or
+	//- 					a.btn.btn-default(href='/#!/signup') Sign Up
+	//- 				.col-xs-12.col-sm-12.col-md-3.col-lg-2
+	//- 					.dropdown
+	//- 						button.btn-btn-primary.dropdown-toggle(type="button" data-toggle="dropdown") Lebron James
+	//- 						span.caret
+	//- 						ul.dropdown-menu
+	//- 							li
+	//- 								a(href='/#!/')
+	//- 							li
+	//- 								a(href='/#!/signout')
+
+	//- .container
+	//- 	.navbar.navbar-default
+	//- 		.navbar-header.pull-left
+	//- 			a.navbar-brand(href="/#!") Task Manager
+	//- 		.navbar-header.pull-right
+	//- 			form.form-inline
+	//- 				.form-group
+	//- 					input.form-control(placeholder="username")
+	//- 				.form-group
+	//- 					input.form-control(placeholder="password")
+	//- 				button.form-group.btn.btn-primary Sign In
+	//- 				p or
+	//- 				a.nav-item.btn.btn-primary(href='/#!/signup') Sign Up
+
+	//- .navbar.navbar-inverse.navbar-fixed-top
+	//- 	.container
+	//- 		.navbar-header
+	//- 			a.navbar-brand(href="/#!/") Task Manager
+	//- 				h6 For those who highly value their time
+	//- 			.navbar-collapse.collapse
+	//- 				ul.nav.navbar-nav
+	//- 					li
+	//- 						a(href="/#!/") Home
+	//- 					li
+	//- 						a(href="/#!/elsewhere") Somewhere
+	//- 				.navbar-right
+	//- 					form.navbar-from
+	//- 						ul.nav.navbar-nav
+	//- 							li
+	//- 								a(href="/#!/signup")
+	//- 						.form-group
+	//- 							input.form-control(placeholder="username")
+	//- 						.form-group
+	//- 							input.form-control(placeholder="password")
+	//- 						button.btn.btn-primary Sign In
+	//- 					ul.nav.navbar-nav.navbar-right
+	//- 						li.dropdown
+	//- 							a.dropdown-toggle(href="", data-toggle="dropdown") Lebron James
+	//- 								b.caret
+	//- 							ul.dropdown-menu
+	//- 								li
+	//- 									a(href="/#!/admin/users") User Admin
+	//- 								li
+	//- 									a(href="/#!/profile") Profile
+	//- 								li
+	//- 									a(href="") Sign out
+	.div
+		a(href="/#!/") Home
+		a(href="/#!/signup") Sign Up
+	.div(data-ng-controller="LoginController")
+		form(data-ng-submit="signin(username, password)" data-ng-hide="identity.isAuthenticated()")
+			input(placeholder="username" data-ng-model="username")
+			input(placeholder="password" data-ng-model="password")
+			input(type="submit")
+		p(data-ng-hide="identity.isAuthenticated()") No user session
+		//- p(data-ng-show="identity.isAuthenticated()") User session for {{ firstName}} {{ lastName }}
+		p(data-ng-show="identity.isAuthenticated()") {{ identity.user.lastName }}, {{ identity.user.firstName }}
+		a(href="/#!/" data-ng-click="signout()") Sign Out
+
+	div(ng-view)
