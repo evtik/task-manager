@@ -5,7 +5,7 @@ express = require './config/express'
 passport = require './config/passport'
 
 db = mongoose()
-app = express()
+app = express db
 passport = passport()
 
 app.listen(process.env.PORT || 3000)

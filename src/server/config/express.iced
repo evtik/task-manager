@@ -7,9 +7,10 @@ path = require 'path'
 bodyParser = require 'body-parser'
 methodOverride = require 'method-override'
 session = require 'express-session'
+MongoStore = require('connect-mongo') session
 passport = require 'passport'
 
-module.exports = () ->
+module.exports = (db) ->
 	app = express()
 	server = http.createServer app
 
@@ -22,10 +23,14 @@ module.exports = () ->
 	app.use bodyParser.json()
 	app.use methodOverride()
 
+	# mongoStore = new MongoStore db: db.connection.db
+	mongoStore = new MongoStore mongooseConnection: db.connection
+
 	app.use session
 		saveUninitialized: on
 		resave: on
 		secret:config.sessionSecret
+		store: mongoStore
 
 	app.locals.basedir = path.join __dirname, '/../app/views'
 	app.set 'views', __dirname + '/../app/views'
