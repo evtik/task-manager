@@ -6759,6 +6759,18 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
+div.navbar-collapse.collapse {
+  display: block;
+  overflow: hidden;
+  max-height: 0px;
+  -webkit-transition: max-height 0.3s ease;
+  -moz-transition: max-height 0.3s ease;
+  -o-transition: max-height 0.3s ease;
+  transition: max-height 0.3s ea;
+}
+div.navbar-collapse.collapse.in {
+  max-height: 2000px;
+}
 .tm-navbar {
   background: #4470af;
   border-radius: 1rem;

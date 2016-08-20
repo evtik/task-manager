@@ -24,11 +24,12 @@ exports.authenticate = (req, res, next) ->
 		if err
 			return next err
 		if !user
-			res.send getErrorMessages: ['passport auth failed']
-		req.logIn user, (err) ->
-			if err
-				return next err
-			res.send user: user
+			res.send success:off
+		else
+			req.logIn user, (err) ->
+				if err
+					return next err
+				res.send success: on, user: user
 	auth req, res, next
 
 exports.create = (req, res, next) ->

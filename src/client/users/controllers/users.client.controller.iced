@@ -1,6 +1,6 @@
 require('angular').module('users').controller 'UsersController',
-	['$scope', '$routeParams', '$location', 'Users',
-		($scope, $routeParams, $location, Users) ->
+	['$scope', '$routeParams', '$location', 'Users', 'Identity'
+		($scope, $routeParams, $location, Users, Identity) ->
 
 			$scope.create = () ->
 				user = new Users
@@ -11,7 +11,9 @@ require('angular').module('users').controller 'UsersController',
 					confirmPassword: @confirmPassword
 
 				user.$save (response) ->
-					$location.path 'users/' + response._id
+					Identity.user = user
+					# $location.path 'users/' + response._id
+					$location.path '/'
 				, (errorResponse) ->
 						$scope.error = errorResponse
 

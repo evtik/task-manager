@@ -38,18 +38,20 @@ exports.authenticate = function(req, res, next) {
       return next(err);
     }
     if (!user) {
-      res.send({
-        getErrorMessages: ['passport auth failed']
+      return res.send({
+        success: false
+      });
+    } else {
+      return req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+        return res.send({
+          success: true,
+          user: user
+        });
       });
     }
-    return req.logIn(user, function(err) {
-      if (err) {
-        return next(err);
-      }
-      return res.send({
-        user: user
-      });
-    });
   });
   return auth(req, res, next);
 };

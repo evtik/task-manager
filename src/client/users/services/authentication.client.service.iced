@@ -9,8 +9,7 @@ require('angular').module('users').factory 'Authentication',
 					username: username
 					password: password
 				.then (response) ->
-					console.log response
-					if response.status is 200
+					if response.data.success
 						user = new Users
 						angular.extend user, response.data.user
 						Identity.user = user

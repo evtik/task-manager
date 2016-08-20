@@ -4,9 +4,12 @@ require('angular').module('users').controller 'LoginController',
 			$scope.identity = Identity
 
 			$scope.signin = (username, password) ->
-				Authentication.authenticateUser username, password
+				Authentication.authenticateUser(username, password).then (success) ->
+					$location.path '/'
 
 			$scope.signout = () ->
 				Authentication.logoutUser().then () ->
-					$scope.identity = null
+					$scope.username = ""
+					$scope.password = ""
+					$location.path '/'
 	]
