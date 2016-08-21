@@ -3,16 +3,23 @@ require 'angular-resource'
 require 'angular-route'
 require 'angular-animate'
 require 'angular-ui-bootstrap'
+require 'angular-growl-v2'
 require './index/index.client.module'
 require './users/users.client.module'
 
 mainApplicationModuleName = 'taskManager'
 
 mainApplicationModule = angular.module mainApplicationModuleName,
-	['ngRoute', 'ngResource', 'ngAnimate', 'ui.bootstrap', 'index', 'users']
+	['ngRoute', 'ngResource', 'ngAnimate',
+		'ui.bootstrap', 'angular-growl', 'index', 'users']
 
 mainApplicationModule.config ['$locationProvider', ($locationProvider) ->
 	$locationProvider.hashPrefix '!'
+]
+
+mainApplicationModule.config ['growlProvider', (growlProvider) ->
+	growlProvider.onlyUniqueMessages on
+	growlProvider.globalTimeToLive 2000
 ]
 
 if window.location.hash is '#_=_'
