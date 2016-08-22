@@ -9,13 +9,32 @@ Schema = mongoose.Schema;
 UserSchema = new Schema({
   firstName: {
     type: String,
-    required: 'At least your first name is required'
+    trim: true,
+    required: 'At least your first name is required',
+    validate: [
+      function(firstName) {
+        return /^[a-zа-я]+$/i.test(firstName);
+      }, 'First name can contain only letters'
+    ]
   },
-  lastName: String,
+  lastName: {
+    type: String,
+    trim: true,
+    validate: [
+      function(lastName) {
+        return /^[a-zа-я]+$/i.test(lastName);
+      }, 'Last name can contain only letters'
+    ]
+  },
   userName: {
     type: String,
     trim: true,
     required: 'Username is required!',
+    validate: [
+      function(userName) {
+        return /^[a-zа-я0-9]+$/i.test(userName);
+      }, 'Username can contain only letters and digits'
+    ],
     index: {
       unique: true
     }

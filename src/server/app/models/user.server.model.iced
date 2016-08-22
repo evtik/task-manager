@@ -5,17 +5,35 @@ Schema = mongoose.Schema
 UserSchema = new Schema
 	firstName:
 		type: String
+		trim: on
 		required: 'At least your first name is required'
-	lastName: String
+		validate: [
+			(firstName) ->
+				return /^[a-zа-я]+$/i.test firstName
+			,
+			'First name can contain only letters'
+		]
+	lastName:
+		type: String
+		trim: on
+		validate: [
+			(lastName) ->
+				return /^[a-zа-я]+$/i.test lastName
+			,
+			'Last name can contain only letters'
+		]
 	userName:
 		type: String
 		trim: on
 		required: 'Username is required!'
+		validate: [
+			(userName) ->
+				return /^[a-zа-я0-9]+$/i.test userName
+			,
+			'Username can contain only letters and digits'
+		]
 		index:
 			unique: on
-	# provider:
-	# 	type: String
-	# 	default: 'local'
 	password:
 		type: String
 		required: 'Password is required'
