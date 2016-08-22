@@ -3,6 +3,10 @@ require('angular').module('users').controller 'UsersController',
 		($scope, $routeParams, $location, Users, Identity) ->
 
 			$scope.create = () ->
+				# $scope.$broadcast 'show-errors-check-validity'
+
+				return if $scope.userForm.$invalid
+
 				user = new Users
 					firstName: @firstName
 					lastName: @lastName

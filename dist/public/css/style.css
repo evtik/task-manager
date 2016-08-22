@@ -6903,6 +6903,12 @@ div.navbar-collapse.collapse {
 div.navbar-collapse.collapse.in {
   max-height: 2000px;
 }
+.form-group .help-block {
+  display: none;
+}
+.form-group.has-error .help-block {
+  display: block;
+}
 .ng-cloak {
   display: none !important;
 }

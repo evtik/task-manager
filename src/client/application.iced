@@ -22,6 +22,8 @@ mainApplicationModule.config ['growlProvider', (growlProvider) ->
 	growlProvider.globalTimeToLive 2000
 ]
 
+require './common'
+
 if window.location.hash is '#_=_'
 	window.location.hash = '#!'
 
