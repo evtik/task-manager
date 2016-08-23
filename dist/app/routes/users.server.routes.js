@@ -10,5 +10,6 @@ module.exports = function(app) {
     req.logout();
     return res.end();
   });
+  app.route('/user/exists/').post(users.userByUsername);
   return app.param('userId', users.userByID);
 };

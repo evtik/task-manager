@@ -12,4 +12,6 @@ module.exports = (app) ->
 		.post (req, res) ->
 			req.logout()
 			res.end()
+	app.route '/user/exists/'
+		.post users.userByUsername
 	app.param 'userId', users.userByID

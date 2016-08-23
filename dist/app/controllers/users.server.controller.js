@@ -75,6 +75,23 @@ exports.create = function(req, res, next) {
   });
 };
 
+exports.userByUsername = function(req, res, next) {
+  return User.findOneByUsername(req.body.userName, function(err, user) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.send({
+        exists: false
+      });
+    } else {
+      return res.send({
+        exists: true
+      });
+    }
+  });
+};
+
 exports.read = function(req, res) {
   return res.json(req.user);
 };

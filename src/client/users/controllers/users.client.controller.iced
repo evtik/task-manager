@@ -1,6 +1,6 @@
 require('angular').module('users').controller 'UsersController',
-	['$scope', '$routeParams', '$location', 'Users', 'Identity'
-		($scope, $routeParams, $location, Users, Identity) ->
+	['$scope', '$routeParams', '$location', 'Users', 'Identity', 'growl',
+		($scope, $routeParams, $location, Users, Identity, growl) ->
 
 			$scope.create = () ->
 				# $scope.$broadcast 'show-errors-check-validity'
@@ -17,6 +17,7 @@ require('angular').module('users').controller 'UsersController',
 				user.$save (response) ->
 					Identity.user = user
 					# $location.path 'users/' + response._id
+					growl.success 'User has been successfully created'
 					$location.path '/'
 				, (errorResponse) ->
 						$scope.error = errorResponse

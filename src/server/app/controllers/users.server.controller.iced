@@ -44,6 +44,15 @@ exports.create = (req, res, next) ->
 					return next err
 				res.json user
 
+exports.userByUsername = (req, res, next) ->
+	User.findOneByUsername req.body.userName, (err, user) ->
+		if err
+			return next err
+		if !user
+			res.send exists: off
+		else
+			res.send exists: on
+
 exports.read = (req, res) ->
 	res.json req.user
 

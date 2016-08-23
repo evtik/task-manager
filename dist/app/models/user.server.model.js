@@ -65,7 +65,7 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.statics.findOneByUsername = function(username, callback) {
   return this.findOne({
-    username: new RegExp(username, 'i')
+    userName: new RegExp(username, 'i')
   }, callback);
 };
 

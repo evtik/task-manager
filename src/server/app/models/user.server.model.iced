@@ -56,7 +56,7 @@ UserSchema.pre 'save', (next) ->
 		next()
 
 UserSchema.statics.findOneByUsername = (username, callback) ->
-	@findOne username: new RegExp(username, 'i'), callback
+	@findOne userName: new RegExp(username, 'i'), callback
 
 UserSchema.methods.hashPassword = (password) ->
 	crypto.pbkdf2Sync(password, @salt, 10000, 64).toString 'base64'
