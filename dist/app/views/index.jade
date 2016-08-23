@@ -16,7 +16,8 @@ block main-content
 					li
 						a(href="/#!/") Home
 					li
-						a(href="/#!/signup" data-ng-hide="identity.isAuthenticated()") Sign Up
+						//- a(href="/#!/signup" data-ng-hide="identity.isAuthenticated()") Sign Up
+						a(href data-ng-click="showSignupModal()" data-ng-hide="identity.isAuthenticated()") Sign Up
 				form.navbar-form.navbar-right.ng-cloak(data-ng-hide="identity.isAuthenticated()" data-ng-submit="signin(username, password)")
 					.form-group
 						input.form-control(placeholder="username" data-ng-model="username")

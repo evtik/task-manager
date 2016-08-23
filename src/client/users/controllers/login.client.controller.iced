@@ -1,6 +1,6 @@
 require('angular').module('users').controller 'LoginController',
-	['$scope', '$location', 'Identity', 'Authentication', 'growl',
-		($scope, $location, Identity, Authentication, growl) ->
+	['$scope', '$location', '$uibModal', 'Identity', 'Authentication', 'growl',
+		($scope, $location, $uibModal, Identity, Authentication, growl) ->
 			$scope.identity = Identity
 
 			$scope.signin = (username, password) ->
@@ -17,4 +17,20 @@ require('angular').module('users').controller 'LoginController',
 					$scope.username = ""
 					$scope.password = ""
 					$location.path '/'
+
+			$scope.showSignupModal = () ->
+				@username = ""
+				@password = ""
+				modalInstance = $uibModal.open
+					templateUrl: 'users/views/signup-modal.client.view.html'
+					controller: 'SignupController'
+					scope: $scope
+					resolve:
+						userForm: () ->
+							return $scope.userForm
+
+				# modalInstance.result.then () ->
+				# 	console.log 'success form'
+				# , () ->
+				# 	console.log 'cancel form'
 	]
