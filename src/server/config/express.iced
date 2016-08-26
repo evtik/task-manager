@@ -27,7 +27,7 @@ module.exports = (db) ->
 	mongoStore = new MongoStore mongooseConnection: db.connection
 
 	app.use session
-		saveUninitialized: on
+		saveUninitialized: off
 		resave: on
 		secret:config.sessionSecret
 		store: mongoStore
@@ -39,8 +39,9 @@ module.exports = (db) ->
 	app.use passport.initialize()
 	app.use passport.session()
 
-	(require '../app/routes/index.server.routes')(app)
 	(require '../app/routes/users.server.routes')(app)
+	(require '../app/routes/projects.server.routes')(app)
+	(require '../app/routes/index.server.routes')(app)
 
 	app.use express.static(path.join(__dirname + '/../public'))
 

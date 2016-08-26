@@ -1,13 +1,13 @@
 require('angular').module('users').controller 'LoginController',
-	['$scope', '$location', '$uibModal', 'Identity', 'Authentication', 'growl',
-		($scope, $location, $uibModal, Identity, Authentication, growl) ->
+	['$scope', '$location', '$routeParams', '$uibModal', 'Identity', 'Authentication', 'growl',
+		($scope, $location, $routeParams, $uibModal, Identity, Authentication, growl) ->
 			$scope.identity = Identity
 
 			$scope.signin = (username, password) ->
 				Authentication.authenticateUser(username, password).then (success) ->
 					if success
 						growl.success 'Successfully logged in!'
-						$location.path '/'
+						$location.path "/users/#{$scope.identity.user._id}/projects"
 					else
 						growl.error 'Wrong username or password!'
 

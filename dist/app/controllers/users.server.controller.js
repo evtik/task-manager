@@ -53,7 +53,8 @@ exports.authenticate = function(req, res, next) {
       });
     }
   });
-  return auth(req, res, next);
+  auth(req, res, next);
+  return null;
 };
 
 exports.create = function(req, res, next) {
@@ -107,4 +108,17 @@ exports.userByID = function(req, res, next, id) {
       return next();
     }
   });
+};
+
+exports.requiresLogin = function(req, res, next) {
+  console.log("requiresLogin() req.user is...");
+  console.log(req.user);
+  console.log("requiresLogin() req.isAuthenticated() is...");
+  console.log(req.isAuthenticated());
+  if (!req.isAuthenticated()) {
+    return res.status(401).send({
+      message: 'User is not logged in'
+    });
+  }
+  return next();
 };

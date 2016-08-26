@@ -10,6 +10,10 @@ block main-content
 					span.icon-bar
 					span.icon-bar
 					span.icon-bar
+				//- a.navbar-left(href="/#!/")
+				//- 	img(src="/images/task.svg")
+				//- a.navbar-left(href="/#!/")
+				//- 	img(src="/images/task.jpg" style="transform:scale(.2);transform-origin: 90% 90%;")
 				a.navbar-brand(href="/#!/") Task Manager
 			.collapse.navbar-collapse(data-ng-class="!navCollapsed && 'in'")
 				ul.nav.navbar-nav
@@ -18,6 +22,8 @@ block main-content
 					li
 						//- a(href="/#!/signup" data-ng-hide="identity.isAuthenticated()") Sign Up
 						a(href data-ng-click="showSignupModal()" data-ng-hide="identity.isAuthenticated()") Sign Up
+					li
+						a(data-ng-show="identity.user" href="/#!/users/{{identity.user._id}}/projects") User's projects
 				form.navbar-form.navbar-right.ng-cloak(data-ng-hide="identity.isAuthenticated()" data-ng-submit="signin(username, password)")
 					.form-group
 						input.form-control(placeholder="username" data-ng-model="username")

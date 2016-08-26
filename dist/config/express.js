@@ -40,7 +40,7 @@ module.exports = function(db) {
     mongooseConnection: db.connection
   });
   app.use(session({
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: true,
     secret: config.sessionSecret,
     store: mongoStore
@@ -50,8 +50,9 @@ module.exports = function(db) {
   app.set('view engine', 'jade');
   app.use(passport.initialize());
   app.use(passport.session());
-  (require('../app/routes/index.server.routes'))(app);
   (require('../app/routes/users.server.routes'))(app);
+  (require('../app/routes/projects.server.routes'))(app);
+  (require('../app/routes/index.server.routes'))(app);
   app.use(express["static"](path.join(__dirname + '/../public')));
   return server;
 };

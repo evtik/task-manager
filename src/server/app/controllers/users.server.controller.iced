@@ -29,8 +29,9 @@ exports.authenticate = (req, res, next) ->
 			req.logIn user, (err) ->
 				if err
 					return next err
-				res.send success: on, user: user
+				return res.send success: on, user: user
 	auth req, res, next
+	null
 
 exports.create = (req, res, next) ->
 	user = new User req.body
@@ -63,3 +64,12 @@ exports.userByID = (req, res, next, id) ->
 		else
 			req.user = user
 			next()
+
+exports.requiresLogin = (req, res, next) ->
+	console.log "requiresLogin() req.user is..."
+	console.log req.user
+	console.log "requiresLogin() req.isAuthenticated() is..."
+	console.log req.isAuthenticated()
+	if !req.isAuthenticated()
+		return res.status(401).send message: 'User is not logged in'
+	next()

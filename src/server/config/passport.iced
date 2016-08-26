@@ -1,5 +1,5 @@
-mongoose = require 'mongoose'
 passport = require 'passport'
+mongoose = require 'mongoose'
 
 module.exports = () ->
 

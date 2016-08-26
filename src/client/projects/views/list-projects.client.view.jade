@@ -1,0 +1,77 @@
+.container
+	h3 Here will be projects list for {{identity.user.firstName}} {{identity.user.lastName}}
+	.container
+		.row
+			.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xs-offset-2.col-sm-offset-2.col-md-offset-2.col-lg-offset-2
+				.row.tm-project-header
+					.col-xs-1.col-sm-1.col-md-1.col-lg-1
+						i.fa.fa-calendar-o.fa-3x.tm-glyphicon-shadow-light-bottom
+					//- .col-xs-11.col-sm-11.col-md-11.col-lg-11
+					//- 	span.tm-project-name Test project
+					//- 	section.pull-right.tm-project-buttons
+					//- 		i.fa.fa-pencil
+					//- 		span &#124
+					//- 		i.fa.fa-trash
+					.col-xs-11.col-sm-11.col-md-11.col-lg-11
+						.input-group
+							input.form-control(data-ng-model="someValue")
+							.input-group-btn
+								button.btn.btn-success(type="submit" data-ng-click="alert(someValue);") Add project
+		.row
+			.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xs-offset-2.col-sm-offset-2.col-md-offset-2.col-lg-offset-2
+				.row.tm-project-add-task
+					.col-xs-1.col-sm-1.col-md-1.col-lg-1
+						i.fa.fa-plus.fa-3x.tm-add-task-button.tm-glyphicon-shadow-dark-top
+					.col-xs-11.col-sm-11.col-md-11.col-lg-11
+						.input-group
+							input.form-control(data-ng-model="someValue")
+							.input-group-btn
+								button.btn.btn-success(type="submit" data-ng-click="alert(someValue);") Add task
+		.row
+			.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xs-offset-2.col-sm-offset-2.col-md-offset-2.col-lg-offset-2.tm-tasks-table-container
+				table.tm-tasks-table
+					tr.tm-task-row
+						td
+							input(type="checkbox")
+						td
+							i.fa.fa-bell.tm-task-bell.tm-task-bell-pendulum
+						td.tm-task-caption(colspan="5")
+							p.text-justify.
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						td
+							section.tm-task-buttons
+									i.fa.fa-calendar
+									span &#124
+									i.fa.fa-sort
+									span &#124
+									i.fa.fa-pencil
+									span &#124
+									i.fa.fa-trash
+					tr.tm-task-row
+						td
+							input(type="checkbox")
+						td
+							i.fa.fa-bell.tm-task-bell.tm-task-bell-pendulum
+						td.tm-task-caption(colspan="5")
+							p.text-justify.
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						td(colspan="4")
+							section.tm-task-buttons
+									i.fa.fa-calendar
+									span &#124
+									i.fa.fa-sort
+									span &#124
+									i.fa.fa-pencil
+									span &#124
+									i.fa.fa-trash
+					tr
+						td &nbsp
+						td &nbsp
+						td(colspan="5") &nbsp
+						td &nbsp
+	pre {{projects}}

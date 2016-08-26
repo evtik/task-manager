@@ -20,6 +20,7 @@ require('angular').module('users').controller 'SignupController',
 					growl.success 'User has been successfully created'
 					$uibModalInstance.close()
 					# $location.path '/'
+					$location.path "/user/#{$routeParams.userId}/projects"
 				, (errorResponse) ->
 						$scope.error = errorResponse
 

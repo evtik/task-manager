@@ -6,13 +6,12 @@ module.exports = (app) ->
 		.post users.create
 	# app.route '/api/users/:userId'
 	# 	.get users.read
-	app.all '/api/*', (req, res) ->
-		res.send 404
 	app.route '/login'
 		.post users.authenticate
 	app.route '/logout'
 		.post (req, res) ->
-			req.logout()
+			req.logOut()
+			req.session.destroy()
 			res.end()
 	app.route '/user/exists/'
 		.post users.userByUsername
