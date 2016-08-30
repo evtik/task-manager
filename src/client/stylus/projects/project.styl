@@ -1,11 +1,13 @@
 .tm-project-container
-	background #99b
-	border .5px inset #999
-	border-radius 0px 0px 5px 5px
+	margin-top 5rem
+
+.tm-project-container p.help-block
+	font-size 1rem
 
 .tm-project-header
 .tm-project-add-task
 	padding 2rem
+	min-width 75rem
 
 .tm-project-header .input-group-btn .btn
 .tm-project-add-task .input-group-btn .btn
@@ -66,7 +68,6 @@ i.fa
 	color #fff
 	margin-right 1rem
 
-
 .tm-project-buttons span
 .tm-task-buttons span
 	opacity .3
@@ -77,8 +78,18 @@ i.fa
 .tm-task-row:hover
 	background #fcfed5
 
+.tm-task-done
+	min-width 10rem
+
+.tm-task-warning
+	min-width 5rem
+
+.tm-task-caption
+	min-width 45rem
+
 .tm-task-caption p
 	font-size 2rem
+	margin-top .5rem
 	margin-right 2rem
 
 .tm-task-buttons
@@ -172,6 +183,39 @@ table.tm-tasks-table input[type=checkbox]
 	height 2rem
 	width 2rem
 	margin 0 3rem 0 4rem
+
+table.tm-tasks-table td form input
+	min-width 32rem
+
+table.tm-tasks-table td form button
+	margin-left .5rem
+
+table.tm-tasks-table td table tr td
+	border hidden
+	margin 0px
+	padding 0px !important
+	height 1rem
+
+.tm-new-project
+	margin-top 5rem
+
+.tm-add-project-button
+	max-width 25rem
+	background #4470af
+	color #fff
+	font-size 2rem
+	margin 3rem
+	padding 1rem
+	border-top 1px inset white
+	border-left 1px inset black
+	border-right 1px inset black
+	border-radius 4px
+	cursor pointer
+
+.tm-add-project-button i.fa
+	color #333
+	margin-right 2rem
+	vertical-align middle
 
 .tm-project-name
 .tm-project-buttons span

@@ -21,9 +21,7 @@ block main-content
 						a(href="/#!/") Home
 					li
 						//- a(href="/#!/signup" data-ng-hide="identity.isAuthenticated()") Sign Up
-						a(href data-ng-click="showSignupModal()" data-ng-hide="identity.isAuthenticated()") Sign Up
-					li
-						a(data-ng-show="identity.user" href="/#!/users/{{identity.user._id}}/projects") User's projects
+						a.ng-cloak(href data-ng-click="showSignupModal()" data-ng-hide="identity.isAuthenticated()") Sign Up
 				form.navbar-form.navbar-right.ng-cloak(data-ng-hide="identity.isAuthenticated()" data-ng-submit="signin(username, password)")
 					.form-group
 						input.form-control(placeholder="username" data-ng-model="username")
@@ -37,6 +35,7 @@ block main-content
 							b.caret
 						ul.dropdown-menu(uib-dropdown-toggle aria-labelledby="tm-user-dropdown")
 							li
+								a(href="/#!/users/{{identity.user._id}}/projects") User's projects
 								a(href data-ng-click="signout()") Sign Out
 
 	div(ng-view)

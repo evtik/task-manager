@@ -66,10 +66,6 @@ exports.userByID = (req, res, next, id) ->
 			next()
 
 exports.requiresLogin = (req, res, next) ->
-	console.log "requiresLogin() req.user is..."
-	console.log req.user
-	console.log "requiresLogin() req.isAuthenticated() is..."
-	console.log req.isAuthenticated()
 	if !req.isAuthenticated()
 		return res.status(401).send message: 'User is not logged in'
 	next()

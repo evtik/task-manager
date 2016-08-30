@@ -9,6 +9,10 @@ ProjectSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+  created: {
+    type: Date,
+    "default": Date.now
+  },
   name: {
     type: String,
     trim: true,

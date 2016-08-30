@@ -1,77 +1,92 @@
 .container
-	h3 Here will be projects list for {{identity.user.firstName}} {{identity.user.lastName}}
-	.container
+	.row
+		.col-xs-6.col-sm-6.col-md-6.col-lg-6.col-xs-offset-3.col-sm-offset-3.col-md-offset-3.col-lg-offset-3
+			h3.text-center.ng-cloak(data-ng-show="projects.length || newProject") Projects list for {{identity.user.firstName}} {{identity.user.lastName}}
+			.well(data-ng-hide="projects.length || newProject")
+				h3.text-center.ng-cloak You don't have projects yet. Why won't you click the button below to add some?
+			div.ng-cloak(data-ng-show="error")
+				p(data-ng-repeat="err in error.data.errorMessages") {{err}}
+
+	.container(data-ng-repeat="project in projects").tm-project-container
 		.row
 			.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xs-offset-2.col-sm-offset-2.col-md-offset-2.col-lg-offset-2
 				.row.tm-project-header
 					.col-xs-1.col-sm-1.col-md-1.col-lg-1
 						i.fa.fa-calendar-o.fa-3x.tm-glyphicon-shadow-light-bottom
-					//- .col-xs-11.col-sm-11.col-md-11.col-lg-11
-					//- 	span.tm-project-name Test project
-					//- 	section.pull-right.tm-project-buttons
-					//- 		i.fa.fa-pencil
-					//- 		span &#124
-					//- 		i.fa.fa-trash
-					.col-xs-11.col-sm-11.col-md-11.col-lg-11
-						.input-group
-							input.form-control(data-ng-model="someValue")
-							.input-group-btn
-								button.btn.btn-success(type="submit" data-ng-click="alert(someValue);") Add project
+					.col-xs-11.col-sm-11.col-md-11.col-lg-11(data-ng-hide="projectBeingEdited === project")
+						span.tm-project-name {{project.name}}
+						section.pull-right.tm-project-buttons
+							i.fa.fa-pencil(title="Edit project" data-ng-click="editProjectName(project)")
+							span &#124
+							i(title="Delete project" data-ng-click="delete(project, $index)").fa.fa-trash
+					.col-xs-11.col-sm-11.col-md-11.col-lg-11.ng-cloak(data-ng-show="projectBeingEdited === project")
+						form
+							.input-group
+								input.form-control(data-ng-model="project.name")
+								.input-group-btn
+									button.btn.btn-success(type="submit" data-ng-click="saveProjectName(project)") Save
 		.row
 			.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xs-offset-2.col-sm-offset-2.col-md-offset-2.col-lg-offset-2
 				.row.tm-project-add-task
 					.col-xs-1.col-sm-1.col-md-1.col-lg-1
 						i.fa.fa-plus.fa-3x.tm-add-task-button.tm-glyphicon-shadow-dark-top
 					.col-xs-11.col-sm-11.col-md-11.col-lg-11
-						.input-group
-							input.form-control(data-ng-model="someValue")
-							.input-group-btn
-								button.btn.btn-success(type="submit" data-ng-click="alert(someValue);") Add task
+						form
+							.input-group
+								input.form-control(data-ng-model="project.newTask.content" placeholder="Start typing to create a task...")
+								//- p.help-block(data-ng-if="addTask.newTaskContent.$error.required") New task should have content
+								.input-group-btn
+									button.btn.btn-success(type="submit" data-ng-click="addTaskToProject(project)") Add task
 		.row
-			.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xs-offset-2.col-sm-offset-2.col-md-offset-2.col-lg-offset-2.tm-tasks-table-container
+			.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xs-offset-2.col-sm-offset-2.col-md-offset-2.col-lg-offset-2.tm-tasks-table-container.ng-cloak(data-ng-show="project.tasks.length")
 				table.tm-tasks-table
-					tr.tm-task-row
+					tr.tm-task-row(data-ng-repeat="task in project.tasks")
+						td.tm-task-done
+							input(title="Toggle done/undone" type="checkbox" data-ng-disabled="currentTask === task && (taskEditingProperty === 'deadline' || taskEditingProperty === 'content')" data-ng-model="task.done" data-ng-change="toggleStatus(task, project)")
+						td.tm-task-warning
+							i.ng-cloak.fa.fa-bell.tm-task-bell(title="This task is outdated" data-ng-show="taskShowBell(task)").tm-task-bell-pendulum
+						td.tm-task-caption(colspan="6")
+							p(data-ng-hide="currentTask === task && (taskEditingProperty === 'deadline' || taskEditingProperty === 'content')").text-justify {{task.content}}
+							form.form-inline(data-ng-show="currentTask === task && taskEditingProperty === 'deadline'")
+								input.form-control(type="date" data-ng-model="currentTaskCopy.deadlineD")
+								span
+									button.btn.btn-default(type="button" data-ng-click="saveTaskDeadline(task, project)") Save
+									button.btn.btn-default(type="cancel" data-ng-click="cancelEditTaskDeadline()") Cancel
+							form.form-inline(data-ng-show="currentTask === task && taskEditingProperty === 'content'")
+								.form-group
+									input.form-control( data-ng-model="currentTaskCopy.content")
+								span
+									button.btn.btn-default(type="submit" data-ng-click="saveTaskContent(task, project)") Save
+									button.btn.btn-default(type="button" data-ng-click="cancelEditTaskContent()") Cancel
 						td
-							input(type="checkbox")
-						td
-							i.fa.fa-bell.tm-task-bell.tm-task-bell-pendulum
-						td.tm-task-caption(colspan="5")
-							p.text-justify.
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-						td
-							section.tm-task-buttons
-									i.fa.fa-calendar
+							section.tm-task-buttons(data-ng-hide="currentTask === task && (taskEditingProperty === 'deadline' || taskEditingProperty === 'content')")
+									i(title="{{showDeadline(task)}}" data-ng-click="editTaskDeadline(task)").fa.fa-calendar
 									span &#124
-									i.fa.fa-sort
+									i(title="Click for UP, Ctrl+Click for DOWN" data-ng-click="changePriority($index, project, $event)").fa.fa-sort
 									span &#124
-									i.fa.fa-pencil
+									i(title="Edit task" data-ng-click="editTaskContent(task)").fa.fa-pencil
 									span &#124
-									i.fa.fa-trash
-					tr.tm-task-row
-						td
-							input(type="checkbox")
-						td
-							i.fa.fa-bell.tm-task-bell.tm-task-bell-pendulum
-						td.tm-task-caption(colspan="5")
-							p.text-justify.
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						td(colspan="4")
-							section.tm-task-buttons
-									i.fa.fa-calendar
-									span &#124
-									i.fa.fa-sort
-									span &#124
-									i.fa.fa-pencil
-									span &#124
-									i.fa.fa-trash
+									i.fa.fa-trash(title="Delete task" data-ng-click="removeTask(project, $index)")
 					tr
-						td &nbsp
-						td &nbsp
-						td(colspan="5") &nbsp
-						td &nbsp
-	pre {{projects}}
+						td.tm-task-td &nbsp
+						td.tm-task-td &nbsp
+						td.tm-task-td(colspan="6") &nbsp
+						td.tm-task-td &nbsp
+	.container
+		.row.ng-cloak(data-ng-show="newProject").tm-new-project
+			.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xs-offset-2.col-sm-offset-2.col-md-offset-2.col-lg-offset-2
+				.row.tm-project-header
+					.col-xs-1.col-sm-1.col-md-1.col-lg-1
+						i.fa.fa-calendar-o.fa-3x.tm-glyphicon-shadow-light-bottom
+					.col-xs-11.col-sm-11.col-md-11.col-lg-11
+						form
+							.input-group
+								input.form-control(data-ng-model="newProject.name" placeholder="Enter a name for the new project...")
+								.input-group-btn
+									button.btn.btn-success(type="submit" data-ng-click="create()") Add project
+	.container
+		.row
+			.col-xs-4.col-sm-4.col-md-4.col-lg-4.col-xs-offset-4.col-sm-offset-4.col-md-offset-4.col-lg-offset-4
+				.tm-add-project-button.text-center(data-ng-click="addNewProject()")
+					i.fa.fa-plus.fa-2x
+					span Add TODO List

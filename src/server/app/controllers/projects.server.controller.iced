@@ -13,6 +13,7 @@ getErrorMessages = (err) ->
 		['Unknow server error']
 
 exports.create = (req, res, next) ->
+	console.log req.body
 	project = new Project req.body
 	project.creator = req.user
 
@@ -30,7 +31,7 @@ exports.list = (req, res) ->
 			res.json projects
 
 exports.projectByID = (req, res, next, id) ->
-	Project.findById(id).exec (err, project) ->
+	Project.findById(id).populate('creator', 'firstName lastName userName').exec (err, project) ->
 		if err
 			return next err
 		if !project
@@ -60,6 +61,8 @@ exports.delete = (req, res) ->
 			res.json project
 
 exports.hasAuthorization = (req, res, next) ->
+	console.log req.user
+	console.log req.project
 	unless req.user._id.equals req.project.creator._id
 		return res.status(403).send message: 'User is not authorized'
 	next()
