@@ -9353,5 +9353,5 @@ table.tm-tasks-table td table tr td {
   display: none !important;
 }
 body {
-  background-image: linear-gradient(#cecdb7 25%, #c3780d 75%);
+  background: #f4f4f4 url("../images/squairy_light.png");
 }
