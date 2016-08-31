@@ -1,2 +1,13 @@
-Sometime here will be a correct ReadMe...
-Or maybe it will never get one...
+### TaskManager test project for RubyGarage
+
+Type to start
+```sh
+$ npm install --production
+$ npm start
+```
+
+Type to develop
+```sh
+$ npm install
+$ gulp
+```

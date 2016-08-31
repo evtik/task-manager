@@ -11,6 +11,9 @@ require('angular').module('users').controller 'LoginController',
 					else
 						growl.error 'Wrong username or password!'
 
+			$scope.showUserProjects = () ->
+				$location.path "/users/#{$scope.identity.user._id}/projects"
+
 			$scope.signout = () ->
 				Authentication.logoutUser().then () ->
 					growl.success 'You have logged out!'
