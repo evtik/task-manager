@@ -1,0 +1,46 @@
+select distinct status
+from tasks
+order by status
+
+select p.id, p.name, count(t.project_id)
+from tasks t join projects p
+on t.project_id = p.id
+group by p.id
+order by count(t.project_id) desc
+
+select p.id, p.name, count(t.project_id)
+from tasks t join projects p
+on t.project_id = p.id
+group by p.id
+order by p.name
+
+select p.name, t.*
+from projects p, tasks t
+where p.name like 'N%' and p.id = t.project_id
+
+select p.id, p.name, count(t.project_id)
+from tasks t join projects p
+on t.project_id = p.id
+where p.name like '%a%'
+group by p.id
+
+select *
+from tasks
+group by name
+order by name
+
+select t.name, t.status, t.project_id, count(t.project_id)
+from tasks t join projects p
+on t.project_id = p.id
+where p.name = 'Garage'
+group by t.name, t.status
+having count(t.project_id) > 1
+order by t.project_id
+
+select p.id, p.name, count(t.project_id)
+from tasks t join projects p
+on t.project_id = p.id
+where t.status = 'completed'
+group by p.id
+having count(t.project_id) > 10
+order by p.id
