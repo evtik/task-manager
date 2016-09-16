@@ -23,7 +23,6 @@ getErrorMessages = function(err) {
 
 exports.create = function(req, res, next) {
   var project;
-  console.log(req.body);
   project = new Project(req.body);
   project.creator = req.user;
   return project.save(function(err) {
@@ -95,8 +94,6 @@ exports["delete"] = function(req, res) {
 };
 
 exports.hasAuthorization = function(req, res, next) {
-  console.log(req.user);
-  console.log(req.project);
   if (!req.user._id.equals(req.project.creator._id)) {
     return res.status(403).send({
       message: 'User is not authorized'

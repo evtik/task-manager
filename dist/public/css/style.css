@@ -9261,6 +9261,9 @@ table.tm-tasks-table td table tr td {
 .tm-task-buttons i.fa {
   cursor: pointer;
 }
+.tm-task-row-dragover {
+  background: #eee;
+}
 @-moz-keyframes pendulum {
   0% {
     transform: rotate(0deg);
@@ -9353,5 +9356,7 @@ table.tm-tasks-table td table tr td {
   display: none !important;
 }
 body {
-  background: #4b3353 url("../images/1.jpg");
+  background: #4b3353 url("../images/1.jpg") center center no-repeat;
+  background-attachment: fixed;
+  background-size: 100% auto;
 }

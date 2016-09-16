@@ -1,4 +1,4 @@
-.container
+.container.ng-cloak
 	.row
 		.col-xs-6.col-sm-6.col-md-6.col-lg-6.col-xs-offset-3.col-sm-offset-3.col-md-offset-3.col-lg-offset-3
 			h3.text-center.ng-cloak(data-ng-show="projects.length || newProject") Projects list for {{identity.user.firstName}} {{identity.user.lastName}}
@@ -40,7 +40,7 @@
 		.row
 			.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xs-offset-2.col-sm-offset-2.col-md-offset-2.col-lg-offset-2.tm-tasks-table-container.ng-cloak(data-ng-show="project.tasks.length")
 				table.tm-tasks-table
-					tr.tm-task-row(data-ng-repeat="task in project.tasks")
+					tr.tm-task-row(data-ng-repeat="task in project.tasks" id="{{project._id}}-#%&-{{$index}}" tm-task-droppable)
 						td.tm-task-done
 							input(title="Toggle done/undone" type="checkbox" data-ng-disabled="currentTask === task && (taskEditingProperty === 'deadline' || taskEditingProperty === 'content')" data-ng-model="task.done" data-ng-change="toggleStatus(task, project)")
 						td.tm-task-warning
@@ -62,7 +62,8 @@
 							section.tm-task-buttons(data-ng-hide="currentTask === task && (taskEditingProperty === 'deadline' || taskEditingProperty === 'content')")
 									i(title="{{showDeadline(task)}}" data-ng-click="editTaskDeadline(task)").fa.fa-calendar
 									span &#124
-									i(title="Click for UP, Ctrl+Click for DOWN" data-ng-click="changePriority($index, project, $event)").fa.fa-sort
+									//- i(title="Click for UP, Ctrl+Click for DOWN" data-ng-click="changePriority($index, project, $event)").fa.fa-sort
+									i(title="Drag to change task priority" tm-task-draggable="{{project._id}}-#%&-{{$index}}").fa.fa-sort
 									span &#124
 									i(title="Edit task" data-ng-click="editTaskContent(task)").fa.fa-pencil
 									span &#124

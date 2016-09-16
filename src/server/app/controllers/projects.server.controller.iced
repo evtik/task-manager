@@ -13,7 +13,7 @@ getErrorMessages = (err) ->
 		['Unknow server error']
 
 exports.create = (req, res, next) ->
-	console.log req.body
+	# console.log req.body
 	project = new Project req.body
 	project.creator = req.user
 
@@ -61,8 +61,8 @@ exports.delete = (req, res) ->
 			res.json project
 
 exports.hasAuthorization = (req, res, next) ->
-	console.log req.user
-	console.log req.project
+	# console.log req.user
+	# console.log req.project
 	unless req.user._id.equals req.project.creator._id
 		return res.status(403).send message: 'User is not authorized'
 	next()

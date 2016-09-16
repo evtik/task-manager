@@ -51,7 +51,7 @@ angular.module('projects').controller 'ProjectsController',
 				$scope.taskEditingProperty = 'content'
 
 			$scope.cancelEditTaskContent = () ->
-				console.log 'cancel editing fired...'
+				# console.log 'cancel editing fired...'
 				clearEditing()
 
 			$scope.saveTaskContent = (task, project) ->
@@ -73,7 +73,7 @@ angular.module('projects').controller 'ProjectsController',
 						new Date($scope.currentTaskCopy.deadline)
 				else
 					$scope.currentTaskCopy.deadlineD = new Date()
-				console.log $scope.currentTaskCopy
+				# console.log $scope.currentTaskCopy
 				$scope.taskEditingProperty = 'deadline'
 
 			$scope.cancelEditTaskDeadline = () ->
@@ -129,8 +129,8 @@ angular.module('projects').controller 'ProjectsController',
 
 			$scope.update = (project, task) ->
 				project.$update userId: @identity.user._id, () ->
-					console.log 'project updated'
-					console.log project
+					# console.log 'project updated'
+					# console.log project
 					$scope.error = []
 					if $scope.backedupProject
 						$scope.backedupProject = null
@@ -138,13 +138,13 @@ angular.module('projects').controller 'ProjectsController',
 						$scope.backedupTask = null
 				, (errorResponse) ->
 					$scope.error = errorResponse
-					console.log $scope.backedupProject
+					# console.log $scope.backedupProject
 					if task && $scope.backedupTask
 						task.content = $scope.backedupTask.content
-					console.log project
+					# console.log project
 					if $scope.backedupProject
 						project.name = $scope.backedupProject.name
-					console.log project
+					# console.log project
 
 
 			$scope.delete = (project, projectIndex) ->
